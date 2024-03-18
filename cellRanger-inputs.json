@@ -1,0 +1,18 @@
+{
+    "cell_ranger.cellRangerReferenceDir": "/fh/fast/directory/",
+    "cell_ranger.allSamples": 
+    [
+        {
+            "sampleName": "sample1",
+            "cellNumber": "6000",
+            "R1Fastqs": ["", ""],
+            "R2Fastqs": ["", ""]
+        },
+        {
+            "sampleName": "sample2",
+            "cellNumber": "8000",
+            "R1Fastqs": ["", ""],
+            "R2Fastqs": ["", ""]
+        }
+    ]
+}

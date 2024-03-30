@@ -28,8 +28,7 @@ workflow cell_ranger {
           cellRangerReferenceTar = cellRangerReferenceTar,
           cellrangerSample = sample.sampleName,
           threads = 6,
-          cellNumber = sample.cellNumber,
-          taskModules = cellrangerModule
+          cellNumber = sample.cellNumber
       }
   }
 
@@ -51,7 +50,7 @@ task cellRangerCount {
   input {
     Array[File] R1FastqsGEX
     Array[File] R2FastqsGEX
-    String cellRangerReferenceTar
+    File cellRangerReferenceTar
     String cellrangerSample
     Int threads
     Int? cellNumber

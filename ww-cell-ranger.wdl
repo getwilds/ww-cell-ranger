@@ -15,10 +15,8 @@ struct cellRangerSample {
 workflow cell_ranger {
   input {
       Array[cellRangerSample] allSamples
-      String cellRangerReferenceDir
+      String cellRangerReferenceTar
   }
-
-  String cellrangerModule = "CellRanger/6.0.1"
 
   # scatter over each of the samples in the array allSamples
   scatter ( sample in allSamples ) {
@@ -27,7 +25,7 @@ workflow cell_ranger {
         input:
           R1FastqsGEX = sample.R1Fastqs,
           R2FastqsGEX = sample.R2Fastqs,
-          cellRangerReferenceDir = cellRangerReferenceDir,
+          cellRangerReferenceTar = cellRangerReferenceTar,
           cellrangerSample = sample.sampleName,
           threads = 6,
           cellNumber = sample.cellNumber,
@@ -53,31 +51,33 @@ task cellRangerCount {
   input {
     Array[File] R1FastqsGEX
     Array[File] R2FastqsGEX
-    String cellRangerReferenceDir
-    String taskModules
+    String cellRangerReferenceTar
     String cellrangerSample
     Int threads
     Int? cellNumber
   }
+
+  String cellRangerReferenceDir = basename(cellRangerReferenceTar, ".tar.gz")
 
   command <<<
     set -eo pipefail
     mkdir fastqs
     cp ~{sep=' ' R1FastqsGEX} fastqs
     cp ~{sep=' ' R2FastqsGEX} fastqs
+    tar -xvf ~{cellRangerReferenceTar}
     cellranger count \
       --id=countrun \
       --fastqs=fastqs \
-      --sample=~{cellrangerSample} \
-      --transcriptome=~{cellRangerReferenceDir} \
+      --sample="~{cellrangerSample}" \
+      --transcriptome="~{cellRangerReferenceDir}" \
       --localcores=~{threads} \
       ~{"--expect-cells=" + cellNumber}
-    mv countrun/outs/possorted_genome_bam.bam ~{cellrangerSample}.possorted_genome_bam.bam 
-    mv countrun/outs/possorted_genome_bam.bam.bai ~{cellrangerSample}.possorted_genome_bam.bam.bai 
-    mv countrun/outs/raw_feature_bc_matrix/barcodes.tsv.gz ~{cellrangerSample}.barcodes.tsv.gz
-    mv countrun/outs/filtered_feature_bc_matrix/barcodes.tsv.gz ~{cellrangerSample}.filtered.barcodes.tsv.gz
-    mv countrun/outs/filtered_feature_bc_matrix/features.tsv.gz ~{cellrangerSample}.features.tsv.gz
-    mv countrun/outs/filtered_feature_bc_matrix/matrix.mtx.gz ~{cellrangerSample}.matrix.mtx.gz
+    mv countrun/outs/possorted_genome_bam.bam "~{cellrangerSample}.possorted_genome_bam.bam"
+    mv countrun/outs/possorted_genome_bam.bam.bai "~{cellrangerSample}.possorted_genome_bam.bam.bai"
+    mv countrun/outs/raw_feature_bc_matrix/barcodes.tsv.gz "~{cellrangerSample}.barcodes.tsv.gz"
+    mv countrun/outs/filtered_feature_bc_matrix/barcodes.tsv.gz "~{cellrangerSample}.filtered.barcodes.tsv.gz"
+    mv countrun/outs/filtered_feature_bc_matrix/features.tsv.gz "~{cellrangerSample}.features.tsv.gz"
+    mv countrun/outs/filtered_feature_bc_matrix/matrix.mtx.gz "~{cellrangerSample}.matrix.mtx.gz"
   >>>
 
   output {
@@ -91,9 +91,8 @@ task cellRangerCount {
   }
 
   runtime {
-    modules: taskModules
+    docker: "ghcr.io/tefirman/cellranger:latest"
     cpu: threads
-    partition: "campus-new"
   }
 }
 

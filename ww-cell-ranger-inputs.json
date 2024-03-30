@@ -1,5 +1,5 @@
 {
-    "cell_ranger.cellRangerReferenceDir": "/path_to/cell_ranger_ref_dir/",
+    "cell_ranger.cellRangerReferenceTar": "/path_to/cell_ranger_ref_dir/",
     "cell_ranger.allSamples": 
     [
         {

@@ -40,7 +40,6 @@ workflow cell_ranger {
     Array[File] cellrangerfilteredBarcodes = cellRangerCount.filteredBarcodes
     Array[File] cellrangerfeatures = cellRangerCount.features
     Array[File] cellrangerMatrix = cellRangerCount.matrix
-    Array[Array[File]] cellrangerGlob = cellRangerCount.outputDir
   }
 } # End workflow
 

@@ -86,7 +86,6 @@ task cellRangerCount {
     File filteredBarcodes = "~{cellrangerSample}.filtered.barcodes.tsv.gz"
     File features = "~{cellrangerSample}.features.tsv.gz"
     File matrix = "~{cellrangerSample}.matrix.mtx.gz"
-    Array[File] outputDir = glob("./countrun/outs/*")
   }
 
   runtime {

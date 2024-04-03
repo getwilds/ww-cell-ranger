@@ -88,7 +88,7 @@ task cellRangerCount {
   }
 
   runtime {
-    docker: "ghcr.io/tefirman/cellranger:latest"
+    docker: "ghcr.io/getwilds/cellranger:6.0.2"
     cpu: threads
   }
 }

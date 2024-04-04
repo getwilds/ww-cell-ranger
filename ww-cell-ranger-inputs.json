@@ -1,0 +1,18 @@
+{
+    "cell_ranger.cr_ref_tar": "/path_to_ref_data/cell_ranger_ref.tar",
+    "cell_ranger.all_samples": 
+    [
+        {
+            "sample_name": "sample1",
+            "cell_number": "6000",
+            "r1_fastqs": ["", ""],
+            "r2_fastqs": ["", ""]
+        },
+        {
+            "sample_name": "sample2",
+            "cell_number": "8000",
+            "r1_fastqs": ["", ""],
+            "r2_fastqs": ["", ""]
+        }
+    ]
+}

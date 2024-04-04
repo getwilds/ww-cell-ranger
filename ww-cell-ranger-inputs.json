@@ -1,18 +1,18 @@
 {
-    "cell_ranger.cellRangerReferenceTar": "/path_to/cell_ranger_ref_dir/",
-    "cell_ranger.allSamples": 
+    "cell_ranger.cr_ref_tar": "/path_to_ref_data/cell_ranger_ref.tar",
+    "cell_ranger.all_samples": 
     [
         {
-            "sampleName": "sample1",
-            "cellNumber": "6000",
-            "R1Fastqs": ["", ""],
-            "R2Fastqs": ["", ""]
+            "sample_name": "sample1",
+            "cell_number": "6000",
+            "r1_fastqs": ["", ""],
+            "r2_fastqs": ["", ""]
         },
         {
-            "sampleName": "sample2",
-            "cellNumber": "8000",
-            "R1Fastqs": ["", ""],
-            "R2Fastqs": ["", ""]
+            "sample_name": "sample2",
+            "cell_number": "8000",
+            "r1_fastqs": ["", ""],
+            "r2_fastqs": ["", ""]
         }
     ]
 }

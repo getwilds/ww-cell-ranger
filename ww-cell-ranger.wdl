@@ -102,7 +102,7 @@ task CellRangerCount {
   }
 
   runtime {
-    docker: "ghcr.io/getwilds/cellranger:6.0.2"
+    docker: "getwilds/cellranger:6.0.2"
     cpu: threads
   }
 
